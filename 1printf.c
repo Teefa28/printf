@@ -14,6 +14,7 @@ int _printf(const char *format, ...)
 
 	unsigned int index;
 	int count = 0;
+	int s_count;
 
 	va_start(args, format);
 
@@ -27,6 +28,16 @@ int _printf(const char *format, ...)
 		{
 			teefa_ptchr(va_arg(args, int));
 			index++;
+		}
+		else if (format[index + 1] == 's')
+		{
+			s_count = putss(va_arg(args, char *));
+			index++;
+			count += (s_count - 1);
+		}
+		else if (format[index + 1] == '%')
+		{
+			teefa_ptchr('%');
 		}
 		count++;
 	}
